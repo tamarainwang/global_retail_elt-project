@@ -9,11 +9,11 @@ In this case study, I'm tasked with setting up a basic data warehouse for a reta
 ### These tools collectively supported the tasks of data extraction, transformation, and loading into a PostgreSQL database.
 
 Python: The primary programming language for scripting the ETL process.
-Pandas: A Python library for data manipulation and analysis, particularly useful for transforming the data.
-SQLAlchemy: A Python SQL toolkit and Object-Relational Mapping (ORM) library, used for interacting with the PostgreSQL database.
-psycopg2: A PostgreSQL database adapter for Python, facilitating database connections and transactions.
-openpyxl: A Python library to read from and write to Excel 2010+ files, used for handling Excel data.
-dotenv: A Python package for loading environment variables from a .env file, securing database credentials.
+\n Pandas: A Python library for data manipulation and analysis, particularly useful for transforming the data.
+\n SQLAlchemy: A Python SQL toolkit and Object-Relational Mapping (ORM) library, used for interacting with the PostgreSQL database.
+\n psycopg2: A PostgreSQL database adapter for Python, facilitating database connections and transactions.
+\n openpyxl: A Python library to read from and write to Excel 2010+ files, used for handling Excel data.
+\n dotenv: A Python package for loading environment variables from a .env file, securing database credentials.
 os: A standard Python library used for interacting with the operating system, like creating directories.
 
 
