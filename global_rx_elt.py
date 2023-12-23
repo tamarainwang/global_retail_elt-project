@@ -4,6 +4,7 @@ import pandas as pd # data analysis and manipulation library
 from dotenv import load_dotenv
 import psycopg2 # database adapter library that enables Python applications interact with PostgreSQL databases
 import openpyxl # Python library used for reading from and writing to Excel 2010+ files
+from datetime import datetime
 
 # Load environment
 
@@ -74,14 +75,27 @@ def write_to_csv(list_of_dfs:list):
     print("Files written to intermediate storage")
 
 def load_data_to_db(table:str):
-
+    
+    # reads the csv to a dataframe
     data = pd.read_csv(f"outputs/models/{table}.csv")
+    # adds a timestamp column
+    timestamped_dataframe = update_dataframe(original_data = data)
+    # connects to the database
     engine = create_engine(pg_url)
     connection = engine.connect()
-
-    data.to_sql(table, con=connection, if_exists='replace', index=False)
+    # writes table with timestamp column to database
+    timestamped_dataframe.to_sql(table, con=connection, if_exists='replace', index=False)
     connection.close()
     print(f"Data loaded to {table} table.")
+
+def update_dataframe(original_data)-> pd.DataFrame:
+    """Takes in a dataframe and returns another dataframe with timestamp column"""
+    current_time = datetime.now().strftime('%Y-%d-%m %H:%M:%S')
+    original_data['_elt_loaded_at'] = current_time
+    return original_data
+
+
+# Run our function
 
 if __name__ =="__main__":
 
@@ -99,3 +113,5 @@ if __name__ =="__main__":
     files_to_load = ["products","customers","locations","orders"]
     for file in files_to_load:
         load_data_to_db(table=file)
+    
+    
