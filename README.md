@@ -27,7 +27,7 @@ Based on the company’s specifications, the project will be segmented into 2 ta
 
 ### Python
 
-### used data extraction, transformation, and loading into a PostgreSQL database.
+### used for data extraction, transformation, and loading into a PostgreSQL database.
 
 Pandas: I used this library for data manipulation and transformation.  
 SQLAlchemy: I used this to interact with the PostgreSQL database (ElephantSQL DB).  
