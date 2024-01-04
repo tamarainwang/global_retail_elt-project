@@ -16,17 +16,19 @@ file_path = 'global-superstore-data.xlsx'
 
 df = pd.read_excel(file_path)
 
-def transform_column_names(df:pd.DataFrame)-> pd.DataFrame: # the --> pd.Daframe isnt compulsory its just to tell us that a dataframe is going to be returned
-    """transforms column names of a dataframe to lowercase and repaces spaces with underscores"""
-    df.columns = [column.strip().lower().replace(' ','_').replace('-','_') for column in df.columns]
-    return df
-
 def load_excel_data(data_source:str,
                     sheet_name:str):
     """Function to load excel data"""
     print(f'Loading data from {data_source}......')
     raw_data = pd.read_excel(data_source, sheet_name=sheet_name)
     return raw_data
+
+def transform_column_names(df:pd.DataFrame)-> pd.DataFrame: # the --> pd.Daframe isnt compulsory its just to tell us that a dataframe is going to be returned
+    """transforms column names of a dataframe to lowercase and repaces spaces with underscores"""
+    df.columns = [column.strip().lower().replace(' ','_').replace('-','_') for column in df.columns]
+    return df
+
+
 
 
 # Normalization ----> Breaking it all apart., Breaking the table into the 4 subsets below and then removing duplicates based on the primary key
@@ -49,13 +51,13 @@ def normalize_data(df):
     customers_df_clean = customers_df.drop_duplicates()
     print(f"Done transforming customers ---> current length = {len(customers_df_clean)}")
 
-    locations_df = df[['city', 'state', 'country']]
+    locations_df = df[['city', 'state', 'country','market']]
     locations_df_clean = locations_df.drop_duplicates()
     print(f"Done transforming locations ---> current length = {len(locations_df_clean)}")
    
     # validate order duplications
 
-    orders_df = df.drop(columns = ['category', 'sub_category', 'product_name','customer_name','state', 'country'])
+    orders_df = df.drop(columns = ['category', 'sub_category', 'product_name','customer_name','state', 'city'])
 
     return[products_df_clean,customers_df_clean,locations_df_clean,orders_df]
 
@@ -74,6 +76,12 @@ def write_to_csv(list_of_dfs:list):
 
     print("Files written to intermediate storage")
 
+def update_dataframe(original_data)-> pd.DataFrame:
+    """Takes in a dataframe and returns another dataframe with timestamp column"""
+    current_time = datetime.now().strftime('%Y-%d-%m %H:%M:%S')
+    original_data['_elt_loaded_at'] = current_time
+    return original_data
+
 def load_data_to_db(table:str):
     
     # reads the csv to a dataframe
@@ -88,12 +96,6 @@ def load_data_to_db(table:str):
     connection.close()
     print(f"Data loaded to {table} table.")
 
-def update_dataframe(original_data)-> pd.DataFrame:
-    """Takes in a dataframe and returns another dataframe with timestamp column"""
-    current_time = datetime.now().strftime('%Y-%d-%m %H:%M:%S')
-    original_data['_elt_loaded_at'] = current_time
-    return original_data
-
 
 # Run our function
 
@@ -101,17 +103,18 @@ if __name__ =="__main__":
 
     #load data
     raw_data = load_excel_data(data_source=file_path,sheet_name="Orders")
+
+    #transform data
     raw_data_transformed = transform_column_names(raw_data)
 
     #normalize data
     normalized_datasets_list = normalize_data(df=raw_data_transformed)
 
-    #write_to_csv
+    #write_to_intermediate_storage_in_csv_format
     write_to_csv(normalized_datasets_list)
 
-    #load data to db
+    #iterates over normalized tables in intermediate storage and loads to database
     files_to_load = ["products","customers","locations","orders"]
     for file in files_to_load:
         load_data_to_db(table=file)
-    
     

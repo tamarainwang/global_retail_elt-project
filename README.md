@@ -2,19 +2,33 @@
 
 ## BUSINESS PROBLEM
 
-In this case study, I'm tasked with setting up a basic data warehouse for a retail firm that currently stores its data in Excel. My objective is to build an ETL pipeline using Python and Pandas. This involves creating a directory for output files, normalizing data from a provided Excel spreadsheet, and then saving the results into four CSV files for products, customers, locations, and orders. The next step in my project is to materialize these tables into a PostgreSQL database. I used a free Postgres database service, ElephantSQL, for hosting (cost-saving measure). My goal is to effectively transition the firm’s data from Excel into a structured database, laying the groundwork for a more sophisticated data management system.
+In this case study, I'm tasked with setting up a basic data warehouse for a retail firm that currently stores its data in Excel. The companies required a solution that could easily be automated to help the business easily gain insights into their best selling items, clients and locations. 
+
+ My objective is to build an ETL pipeline using Python and Pandas. This involves creating a directory for output files, normalizing data from a provided Excel spreadsheet, and then saving the results into four CSV files for products, customers, locations, and orders. The next step in my project is to materialize these tables into a PostgreSQL database. I used a free Postgres database service, ElephantSQL, for hosting (cost-saving measure). My goal is to effectively transition the firm’s data from Excel into a structured database, laying the groundwork for a more sophisticated data management system.
+
+## CORE CONCEPTS THAT ENABLE DELIVERY OF THIS PORJECT ARE:
+
+1) Problem Statement Breakdown
+2) Proof Of Concept Planning and Architecture (Before writing Code)
+3) Data Transformation and Modelling (SQL Python)
+4) Data Ingestion
+5) Functional ProgrammingPython
+6) Data Analysis (SQL)
+
 
 ## TOOLS 
 
 ### These tools collectively supported the tasks of data extraction, transformation, and loading into a PostgreSQL database.
 
 Python: The primary programming language for scripting the ETL process.
-\n Pandas: A Python library for data manipulation and analysis, particularly useful for transforming the data.
-\n SQLAlchemy: A Python SQL toolkit and Object-Relational Mapping (ORM) library, used for interacting with the PostgreSQL database.
-\n psycopg2: A PostgreSQL database adapter for Python, facilitating database connections and transactions.
-\n openpyxl: A Python library to read from and write to Excel 2010+ files, used for handling Excel data.
-\n dotenv: A Python package for loading environment variables from a .env file, securing database credentials.
-os: A standard Python library used for interacting with the operating system, like creating directories.
+
+
+Pandas: I used this library for data manipulation and transformation.
+SQLAlchemy: I used this to interact with the PostgreSQL database (ElephantSQL DB)
+psycopg2: I used this PostgreSQL database adapter to facilitate database connections and transactions.
+openpyxl: I used Python library to read from and write to the supplied excel file.
+dotenv: Utilised this package to load environment variables from a .env file, to secure my database credentials.
+os: I used this library to interact with my operating system, e.g creating directories.
 
 
 In this project, I followed these steps:
@@ -27,11 +41,14 @@ In this project, I followed these steps:
 
 **Transform Column Names**: I created a function to format column names into a consistent lower case and replace spaces and hyphens with underscores.
 
-**Data Normalization**: I divided the data into four subsets: products, customers, locations, and orders, and removed duplicates.
+**Data Normalization**: I divided the data into four subsets(1 fact table and 3 dimension tables): products, customers, locations, and orders, and removed duplicates
 
-**Export to CSV**: I wrote the normalized data to CSV files for intermediate storage.
+**Export to CSV**: I wrote the normalized data to CSV files for intermediate storage(a directory on my system) "outputs/models"
 
 **Database Upload**: Finally, I uploaded the CSV files to specific tables in the PostgreSQL database using SQLAlchemy.
+
+**Basis Analysis**: I did some basis analysis on the data to help the business gain insights into their best selling items, clients and locations.
+
 
 ## CONCLUSION
 
