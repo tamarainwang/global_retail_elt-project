@@ -23,11 +23,9 @@ Based on the company’s specifications, the project will be segmented into 2 ta
  My objective is to build an ETL pipeline using Python and Pandas. This involves creating a directory for output files, normalizing data from a provided Excel spreadsheet, and then saving the results into four CSV files for products, customers, locations, and orders. The next step in my project is to materialize these tables into a PostgreSQL database. I used a free Postgres database service, ElephantSQL, for hosting (cost-saving measure). My goal is to effectively transition the firm’s data from Excel into a structured database, laying the groundwork for a more sophisticated data management system.
 
 
-## TOOLS 
+## TOOLS THAT SUPPORTED THESE TASK ARE:
 
-### These tools collectively supported the tasks of data extraction, transformation, and loading into a PostgreSQL database.
-
-1) Python: 
+### 1) Python: used data extraction, transformation, and loading into a PostgreSQL database.
 
 Pandas: I used this library for data manipulation and transformation.  
 SQLAlchemy: I used this to interact with the PostgreSQL database (ElephantSQL DB).  
@@ -36,9 +34,7 @@ openpyxl: I used Python library to read from and write to the supplied excel fil
 dotenv: Utilised this package to load environment variables from a .env file, to secure my database credentials.  
 os: I used this library to interact with my operating system, e.g creating directories.
 
-### This was used to manipulate the data in the database,create another analtytics table and perfom some basic analytics.
-
-2) SQL 
+### 2) SQL: this was used to .manipulate the data in the database,create another analtytics table and perfom some basic analytics
 
 In this project, I followed these steps:
 
