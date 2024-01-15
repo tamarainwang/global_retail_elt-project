@@ -74,7 +74,6 @@ Proof of Concept and Planning: Before delving into the development phase, a proo
 
 System Architecture Design: A detailed architecture plan was then developed. This included the specification of hardware and software requirements, the design of the database schema, and the planning of data flow processes within the system.
 
-3. Development
 
 ## 2.3. Data Transformation and Modeling
 
@@ -89,7 +88,7 @@ System Architecture Design: A detailed architecture plan was then developed. Thi
  Python’s functional programming capabilities were leveraged to develop scripts that automated various aspects of the ETL (Extract, Transform, Load) process. This not only made the process more efficient but also reduced the likelihood of errors.
 
 
-Testing: Rigorous testing was conducted to ensure data integrity and the smooth functioning of the ETL process. This included unit testing, system testing, and user acceptance testing.
+Testing: Rigorous testing was conducted to ensure data integrity and the smooth functioning of the ETL process.
 
 Deployment: Upon successful testing, the system was deployed. This included setting up the database environment, deploying Python scripts, and configuring any necessary integrations with other systems.
 
